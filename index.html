@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shri Harish M | Software & Systems</title>
+    
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #030305;
+            --card-bg: rgba(18, 12, 14, 0.7);
+            --card-border: rgba(239, 68, 68, 0.2);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-red: #ef4444;
+            --badge-bg: rgba(30, 15, 18, 0.8);
+            --badge-border: rgba(239, 68, 68, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg-color); 
+            color: var(--text-primary); 
+            line-height: 1.6;
+            padding-bottom: 60px;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(239, 68, 68, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(185, 28, 28, 0.12) 0px, transparent 50%),
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+            background-attachment: fixed;
+        }
+
+        a { color: var(--accent-red); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+        /* Header Card */
+        header { padding-top: 40px; padding-bottom: 20px; }
+
+        .hero-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 35px 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(239, 68, 68, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, #f87171, #ef4444, #991b1b);
+        }
+
+        .hero-title {
+            font-size: 2.3rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.05rem;
+            color: var(--accent-red);
+            font-weight: 600;
+            margin-bottom: 14px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .hero-tagline {
+            font-size: 0.98rem;
+            color: var(--text-secondary);
+            margin-bottom: 22px;
+            max-width: 780px;
+        }
+
+        /* Action Buttons */
+        .action-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(239, 68, 68, 0.15);
+        }
+
+        .action-btn {
+            background: var(--badge-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--badge-border);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s ease;
+        }
+
+        .action-btn:hover {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: var(--accent-red);
+            color: #ffffff;
+            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+
+        .action-btn.primary {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            border: none;
+            color: white;
+            box-shadow: 0 4px 14px rgba(220, 38, 38, 0.4);
+        }
+
+        .action-btn.primary:hover {
+            opacity: 0.95;
+            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.6);
+        }
+
+        /* Filter Tabs */
+        .tab-container {
+            display: flex;
+            gap: 10px;
+            margin: 35px 0 20px 0;
+            border-bottom: 1px solid rgba(239, 68, 68, 0.15);
+            padding-bottom: 10px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-primary);
+            background: var(--badge-bg);
+        }
+
+        .tab-btn.active {
+            color: #ffffff;
+            background: var(--badge-bg);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+        }
+
+        /* Tab Content */
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Red Glass Cards */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+        }
+
+        .card:hover {
+            border-color: rgba(239, 68, 68, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(239, 68, 68, 0.2);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-desc {
+            color: var(--text-secondary);
+            font-size: 0.93rem;
+            margin-bottom: 16px;
+        }
+
+        .upcoming-card {
+            background: rgba(20, 10, 12, 0.5);
+            border: 1px dashed rgba(239, 68, 68, 0.35);
+        }
+
+        .upcoming-card:hover {
+            border-color: rgba(239, 68, 68, 0.6);
+            border-style: solid;
+        }
+
+        .status-pill {
+            font-size: 0.72rem;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        /* Terminal Style Box */
+        .terminal-box {
+            background: rgba(5, 3, 5, 0.9);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.9);
+        }
+
+        .terminal-header {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(239, 68, 68, 0.15);
+        }
+
+        .t-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .t-red { background: #ef4444; }
+        .t-yellow { background: #f59e0b; }
+        .t-green { background: #22c55e; }
+
+        .terminal-body { color: #cbd5e1; line-height: 1.7; }
+        .t-cmd { color: var(--accent-red); }
+        .t-string { color: #f87171; }
+
+        /* Tech Tags */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .tech-tag {
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #f87171;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .bullet-list {
+            padding-left: 18px;
+            color: var(--text-primary);
+            font-size: 0.92rem;
+        }
+
+        .bullet-list li { margin-bottom: 6px; }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-box {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        }
+
+        .skill-box h4 {
+            color: var(--accent-red);
+            font-size: 0.9rem;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-item {
+            background: var(--badge-bg);
+            border: 1px solid var(--badge-border);
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            color: var(--text-primary);
+        }
+
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            padding-top: 20px;
+            border-top: 1px solid rgba(239, 68, 68, 0.15);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header Card -->
+        <header>
+            <div class="hero-card">
+                <h1 class="hero-title">SHRI HARISH M</h1>
+                <div class="hero-subtitle">Software Development • System R&D • Hardware Integration</div>
+                
+                <p class="hero-tagline">
+                    Analyzing technical workflows, researching system requirements, and engineering structured applications across full-stack frameworks and edge devices.
+                </p>
+
+                <!-- Action Links -->
+                <div class="action-bar">
+                    <a href="https://mail.google.com/mail/u/0/#sent?compose=GTvVlcSDbSJbJVsPlgSFnXvjPjTfCgRdtzzcDfHtvWJcBHvnzrzKjGSRjFBNZQGBRMzJPXngsVXNx" target="_blank" class="action-btn primary"><i class="fa-solid fa-paper-plane"></i> Email Me</a>
+                    <a href="https://github.com/shriharish030" target="_blank" class="action-btn"><i class="fa-brands fa-github"></i> GitHub</a>
+                    <a href="https://www.linkedin.com/in/shri-harish-a19516348/" target="_blank" class="action-btn"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <div class="tab-container">
+            <button class="tab-btn active" onclick="switchTab('about')"><i class="fa-solid fa-user"></i> About Me</button>
+            <button class="tab-btn" onclick="switchTab('projects')"><i class="fa-solid fa-folder-open"></i> Projects & Systems</button>
+            <button class="tab-btn" onclick="switchTab('tech')"><i class="fa-solid fa-layer-group"></i> Tech Stack & R&D</button>
+        </div>
+
+        <!-- TAB 1: ABOUT ME -->
+        <div id="about" class="tab-content active">
+            <div class="terminal-box">
+                <div class="terminal-header">
+                    <div class="t-dot t-red"></div>
+                    <div class="t-dot t-yellow"></div>
+                    <div class="t-dot t-green"></div>
+                </div>
+                <div class="terminal-body">
+                    <p><span class="t-cmd">$</span> cat about_shri.txt</p>
+                    <br>
+                    <p>I focus on analyzing complex system requirements, conducting technical R&D, and engineering functional software architectures.</p>
+                    <br>
+                    <p><span class="t-string">> Core Domains:</span> Full-Stack Engineering, AI Edge Applications, Workflow Automation & Hardware Modding.</p>
+                    <p><span class="t-string">> Objective:</span> Building clean, reliable, and user-centric systems that solve real-world problems.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: PROJECTS & SYSTEMS -->
+        <div id="projects" class="tab-content">
+            
+            <!-- NutriLens AI -->
+            <div class="card">
+                <h3><i class="fa-solid fa-bowl-food" style="color: #ef4444;"></i> NutriLens AI — Smart Food Recognition System</h3>
+                <p class="card-desc">
+                    An AI-powered nutrition tracking platform designed around offline-first image recognition to simplify daily dietary monitoring.
+                </p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Java</span>
+                    <span class="tech-tag">Android Studio</span>
+                    <span class="tech-tag">TensorFlow Lite</span>
+                    <span class="tech-tag">MobileNetV2</span>
+                    <span class="tech-tag">Local JSON DB</span>
+                </div>
+                <ul class="bullet-list">
+                    <li>On-device computer vision models classify food images locally with zero internet latency.</li>
+                    <li>Retrieves macronutrient breakdowns (calories, carbs, protein, fats) instantly from local datasets.</li>
+                    <li>Includes daily calorie logging, water intake tracking, and nutrition history visualizer.</li>
+                </ul>
+            </div>
+
+            <!-- API Anomaly Detection -->
+            <div class="card">
+                <h3><i class="fa-solid fa-shield-halved" style="color: #ef4444;"></i> Intelligent API Anomaly Detection Platform</h3>
+                <p class="card-desc">
+                    A real-time security monitoring platform that replaces static rule-based systems with machine learning to identify irregular API behavior.
+                </p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Machine Learning</span>
+                    <span class="tech-tag">LLM & RAG</span>
+                    <span class="tech-tag">Log Analysis</span>
+                    <span class="tech-tag">Real-time Analytics</span>
+                </div>
+                <ul class="bullet-list">
+                    <li>Continuously analyzes traffic logs to automatically detect unknown security threats and traffic spikes.</li>
+                    <li>Utilizes Retrieval-Augmented Generation (RAG) to explain flagged threats and suggest fixes.</li>
+                </ul>
+            </div>
+
+            <!-- Eminent Ventus -->
+            <div class="card">
+                <h3><i class="fa-solid fa-qrcode" style="color: #ef4444;"></i> Eminent Ventus — QR Textile & Queue Management</h3>
+                <p class="card-desc">
+                    An operational management system designed for textile workflows to simplify product scanning and reduce customer wait times.
+                </p>
+                <div class="tech-stack">
+                    <span class="tech-tag">QR Code Scanning</span>
+                    <span class="tech-tag">Inventory Automation</span>
+                    <span class="tech-tag">Workflow R&D</span>
+                </div>
+                <ul class="bullet-list">
+                    <li>Scans product QR codes to immediately manage stock records and eliminate repetitive manual entry.</li>
+                    <li>Optimizes item processing speed to reduce customer waiting queues during peak business hours.</li>
+                </ul>
+            </div>
+
+            <!-- Work in Progress Card -->
+            <div class="card upcoming-card">
+                <h3>
+                    <span><i class="fa-solid fa-hammer" style="color: #ef4444;"></i> Work in Progress</span>
+                    <span class="status-pill"><i class="fa-solid fa-code"></i> Next Up</span>
+                </h3>
+                <p class="card-desc">
+                    Projects and builds currently being developed and experimented with:
+                </p>
+                <ul class="bullet-list" style="color: var(--text-secondary);">
+                    <li><strong>MEAN Stack Web App:</strong> Building web apps with Node.js, Express, MongoDB, and Angular.</li>
+                    <li><strong>Hardware & Audio Hacks:</strong> Bluetooth audio modding, TP4056 power circuits, and custom driver tuning.</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- TAB 3: TECH STACK & R&D -->
+        <div id="tech" class="tab-content">
+            <div class="skills-grid">
+                
+                <div class="skill-box">
+                    <h4><i class="fa-solid fa-code"></i> Backend & Full-Stack</h4>
+                    <div class="skill-list">
+                        <span class="skill-item">Node.js</span>
+                        <span class="skill-item">Express</span>
+                        <span class="skill-item">MongoDB</span>
+                        <span class="skill-item">Angular</span>
+                        <span class="skill-item">Python</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h4><i class="fa-solid fa-brain"></i> AI / ML & Mobile</h4>
+                    <div class="skill-list">
+                        <span class="skill-item">Java</span>
+                        <span class="skill-item">Android Studio</span>
+                        <span class="skill-item">TensorFlow Lite</span>
+                        <span class="skill-item">LLM & RAG</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h4><i class="fa-solid fa-screwdriver-wrench"></i> Systems & Hardware</h4>
+                    <div class="skill-list">
+                        <span class="skill-item">System R&D</span>
+                        <span class="skill-item">Log Analytics</span>
+                        <span class="skill-item">SQL & JSON DB</span>
+                        <span class="skill-item">Hardware Electronics</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2026 Shri Harish. Hosted on GitHub Pages.</p>
+        </footer>
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
