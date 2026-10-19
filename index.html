@@ -112,6 +112,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            cursor: pointer;
             transition: all 0.25s ease;
         }
 
@@ -356,7 +357,10 @@
 
                 <!-- Action Links -->
                 <div class="action-bar">
-                    <a href="https://mail.google.com/mail/u/0/#sent?compose=GTvVlcSDbSJbJVsPlgSFnXvjPjTfCgRdtzzcDfHtvWJcBHvnzrzKjGSRjFBNZQGBRMzJPXngsVXNx" target="_blank" class="action-btn primary"><i class="fa-solid fa-paper-plane"></i> Email Me</a>
+                    <!-- Copy Email Button (Option 2) -->
+                    <a onclick="copyEmail()" class="action-btn primary">
+                        <i class="fa-solid fa-copy"></i> <span id="emailText">Copy Email</span>
+                    </a>
                     <a href="https://github.com/shriharish030" target="_blank" class="action-btn"><i class="fa-brands fa-github"></i> GitHub</a>
                     <a href="https://www.linkedin.com/in/shri-harish-a19516348/" target="_blank" class="action-btn"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
                 </div>
@@ -508,7 +512,7 @@
         </footer>
     </div>
 
-    <!-- Scripts for Tab Switching & Source Inspection Prevention -->
+    <!-- Scripts -->
     <script>
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(content => {
@@ -520,6 +524,18 @@
             
             document.getElementById(tabId).classList.add('active');
             event.currentTarget.classList.add('active');
+        }
+
+       
+        function copyEmail() {
+            const email = "shriharishofficial@gmail.com";
+            navigator.clipboard.writeText(email).then(() => {
+                const btnText = document.getElementById("emailText");
+                btnText.innerText = "Email Copied!";
+                setTimeout(() => {
+                    btnText.innerText = "Copy Email";
+                }, 2000);
+            });
         }
 
         // Disable Right Click
