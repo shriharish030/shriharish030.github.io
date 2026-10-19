@@ -29,7 +29,6 @@
             color: var(--text-primary); 
             line-height: 1.6;
             padding-bottom: 60px;
-            /* Cyberpunk Red Mesh + Grid Background */
             background-image: 
                 radial-gradient(at 0% 0%, rgba(239, 68, 68, 0.15) 0px, transparent 50%),
                 radial-gradient(at 100% 100%, rgba(185, 28, 28, 0.12) 0px, transparent 50%),
@@ -37,7 +36,7 @@
                 linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
             background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
             background-attachment: fixed;
-            user-select: none; /* Prevents text selection */
+            user-select: none;
         }
 
         a { color: var(--accent-red); text-decoration: none; }
@@ -355,12 +354,11 @@
                     Analyzing technical workflows, researching system requirements, and engineering structured applications across full-stack frameworks and edge devices.
                 </p>
 
-                <!-- Action Links -->
+                <!-- Action Links (Copy Email Added) -->
                 <div class="action-bar">
-                    <!-- Copy Email Button (Option 2) -->
-                    <a onclick="copyEmail()" class="action-btn primary">
+                    <button onclick="copyEmail()" class="action-btn primary">
                         <i class="fa-solid fa-copy"></i> <span id="emailText">Copy Email</span>
-                    </a>
+                    </button>
                     <a href="https://github.com/shriharish030" target="_blank" class="action-btn"><i class="fa-brands fa-github"></i> GitHub</a>
                     <a href="https://www.linkedin.com/in/shri-harish-a19516348/" target="_blank" class="action-btn"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
                 </div>
@@ -526,14 +524,14 @@
             event.currentTarget.classList.add('active');
         }
 
-       
+     
         function copyEmail() {
             const email = "shriharishmurugan8@gmail.com";
             navigator.clipboard.writeText(email).then(() => {
                 const btnText = document.getElementById("emailText");
                 btnText.innerText = "Email Copied!";
                 setTimeout(() => {
-                    btnText.innerText = "Copy Email";
+                    btnText.innerText = "Email";
                 }, 2000);
             });
         }
@@ -543,7 +541,7 @@
             e.preventDefault();
         });
 
-        // Disable Inspect Keys (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U)
+        // Disable Inspect Keys
         document.onkeydown = function(e) {
             if (e.keyCode == 123) { return false; } 
             if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; }
