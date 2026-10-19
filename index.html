@@ -29,6 +29,7 @@
             color: var(--text-primary); 
             line-height: 1.6;
             padding-bottom: 60px;
+            /* Cyberpunk Red Mesh + Grid Background */
             background-image: 
                 radial-gradient(at 0% 0%, rgba(239, 68, 68, 0.15) 0px, transparent 50%),
                 radial-gradient(at 100% 100%, rgba(185, 28, 28, 0.12) 0px, transparent 50%),
@@ -36,6 +37,7 @@
                 linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
             background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
             background-attachment: fixed;
+            user-select: none; /* Prevents text selection */
         }
 
         a { color: var(--accent-red); text-decoration: none; }
@@ -506,6 +508,7 @@
         </footer>
     </div>
 
+    <!-- Scripts for Tab Switching & Source Inspection Prevention -->
     <script>
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(content => {
@@ -518,6 +521,20 @@
             document.getElementById(tabId).classList.add('active');
             event.currentTarget.classList.add('active');
         }
+
+        // Disable Right Click
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable Inspect Keys (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U)
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123) { return false; } 
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; }
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; }
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { return false; }
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; } 
+        };
     </script>
 </body>
 </html>
